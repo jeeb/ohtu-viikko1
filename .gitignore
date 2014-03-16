@@ -1,0 +1,6 @@
+# Random OhTu-gitignores
+*.xxx
+
+# the target dir
+target/
+
