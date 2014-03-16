@@ -4,3 +4,5 @@
 # the target dir
 target/
 
+# the OhtuVarasto target dir
+OhtuVarasto/target/
