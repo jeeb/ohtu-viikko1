@@ -21,6 +21,59 @@ public class VarastoTest {
     }
 
     @Test
+    public void addNegativeAmountOfThings() {
+        varasto.lisaaVarastoon(-1);
+
+        // Adding negative amount of things should lead to nothing being added
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void addThingsWithinLimits() {
+        varasto.lisaaVarastoon(5);
+
+        // varasto had zero things, thus adding five should give us five in the saldo
+        assertEquals(5, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void addTooManyThings() {
+        varasto.lisaaVarastoon(9000);
+
+        // varasto overflowed, and anything that went over 10 got thrown into the ether
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void takeNegativeAmountOfThings() {
+        varasto.otaVarastosta(-1);
+
+        // Taking negative amount of things should lead to nothing being done
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void takeThingsWithinLimits() {
+        // Add 7
+        varasto.lisaaVarastoon(7);
+
+        // Take 5
+        varasto.otaVarastosta(5);
+
+        assertEquals(2, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void takeTooManyThings() {
+        // Add 5
+        varasto.lisaaVarastoon(5);
+
+        // Take 9000
+        varasto.otaVarastosta(9000);
+
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    @Test
     public void konstruktoriLuoTyhjanVaraston() {
         assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
     }
